@@ -29,15 +29,15 @@ View(birthweight)
 
 # Regression
 
+# Original model
 rm1 = lm(formula = bwght ~ cigs + faminc + male + white + parity, data = birthweight)
 summary(rm1)
-coef(rm1)
 
 # Q1:
 
+# transforming the family income variable to square
 rm2 = lm(formula = bwght ~ cigs + faminc + I(faminc^2) + male + white + parity, data = birthweight)
 summary(rm2)
-coef(rm2)
 
 # Plot between bwght and family income - linear
 plot1 <- plot(birthweight$faminc, birthweight$bwght, xlab = "Family income",
@@ -54,6 +54,9 @@ summary(rm3)
 
 # Q3
 
+# No need for code
+
+
 # Q4
 
 rm4 = lm(formula = log(bwght) ~ cigs + lfaminc + male + white + parity, data = birthweight)
@@ -65,7 +68,23 @@ summary(rm4)
 # Say we want to know whether the effect of smoking varies by race. Run a model based on the 
 # original model, and interpret your results.
 
-rm5 = lm(formula = cigs ~ )
+rm5 = lm(formula = bwght ~ (cigs * white) + faminc + male + parity, data = birthweight)
+summary(rm5)
+
+# Q6
+
+# Finally, we want to know if the effect of income varies by race. Run this model–again 
+# based on the original model–and interpret the results.
+
+rm6 = lm(formula = bwght ~ cigs + (faminc * white) + male + parity, data = birthweight)
+summary(rm6)
+
+
+#Q7
+
+rm7 = lm(formula = bwght ~ cigs + faminc + male + white + parity, data = birthweight)
+summary(rm7)
+
 
 
 
